@@ -27,7 +27,7 @@
 
 .title-text {
   white-space: pre-wrap;
-  font-family: Supreme;
+  font-family: Supreme-Bold;
   font-style: normal;
   font-weight: bold;
   font-size: 36px;
@@ -39,7 +39,7 @@
 .description-text {
   text-align: left;
   white-space: pre-wrap;
-  font-family: Supreme;
+  font-family: Supreme-Medium;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -58,7 +58,7 @@
 
 .join-waitlist-button {
   color: white;
-  font-family: Supreme;
+  font-family: Supreme-Regular;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -71,7 +71,7 @@
 }
 
 .showMeHow-text {
-  font-family: Supreme;
+  font-family: Supreme-Regular;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;

@@ -19,7 +19,7 @@
   margin-right: auto;
   top: 52px;
 
-  font-family: Supreme;
+  font-family: Supreme-Bold;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -37,7 +37,7 @@
   margin-right: auto;
   top: 100px;
 
-  font-family: Supreme;
+  font-family: Supreme-Medium;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -58,7 +58,7 @@
 
 .join-waitlist-button-mobile {
   color: white;
-  font-family: Supreme;
+  font-family: Supreme-Regular;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -71,7 +71,7 @@
 }
 
 .showMeHow-text-mobile {
-  font-family: Supreme;
+  font-family: Supreme-Regular;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -91,4 +91,13 @@
   height: 369px;
   margin-left: auto;
   margin-right: auto;
+}
+.showMeHow-text-mobile {
+  position: absolute;
+  bottom: 58px;
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 0;
 }

@@ -1,0 +1,94 @@
+.waitlist-page-wrapper-mobile {
+  height: 80vh;
+  margin-top: 15vh;
+  width: 100%;
+  position: relative;
+}
+.mobile-logo {
+  position: absolute;
+  width: 106.41px;
+  height: 25px;
+  left: 24px;
+  top: 45px;
+}
+.title-text-mobile {
+  white-space: pre-wrap;
+  width: 100%;
+  height: 96px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 52px;
+
+  font-family: Supreme;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+
+  color: #0f0f0f;
+}
+
+.description-text-mobile {
+  white-space: pre-wrap;
+  width: 100%;
+  height: 38px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 100px;
+
+  font-family: Supreme;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+
+  color: #0f0f0f;
+}
+
+.button-wrapper-mobile {
+  position: absolute;
+  bottom: 18px;
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.join-waitlist-button-mobile {
+  color: white;
+  font-family: Supreme;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 27px;
+  padding: 18px 66px;
+  background: linear-gradient(103.63deg, #535ffd -11.28%, #7f53fd 111.61%);
+  box-shadow: 0px 10px 20px rgba(83, 95, 253, 0.3);
+  border-radius: 10px;
+  border: 0px;
+}
+
+.showMeHow-text-mobile {
+  font-family: Supreme;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-decoration-line: underline;
+  margin-left: 100px;
+  color: #535ffd;
+}
+
+.image-wrapper-mobile {
+  width: 100%;
+  display: flex;
+}
+
+.image-wrapper-mobile > img {
+  width: 375px;
+  height: 369px;
+  margin-left: auto;
+  margin-right: auto;
+}

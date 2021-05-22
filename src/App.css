@@ -1,0 +1,107 @@
+.logo {
+  position: absolute;
+  width: 106.41px;
+  height: 25px;
+  left: 72px;
+  top: 51px;
+  z-index: 10;
+}
+.waitlist-page-wrapper {
+  height: 75vh;
+  margin-top: 10vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.left-side-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 37%;
+  height: 50%;
+  align-items: left;
+  justify-content: space-around;
+}
+
+.title-text {
+  white-space: pre-wrap;
+  font-family: Supreme;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 49px;
+
+  color: #0f0f0f;
+}
+
+.description-text {
+  text-align: left;
+  white-space: pre-wrap;
+  font-family: Supreme;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+
+  color: #0f0f0f;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.join-waitlist-button {
+  color: white;
+  font-family: Supreme;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 27px;
+  padding: 18px 66px;
+  background: linear-gradient(103.63deg, #535ffd -11.28%, #7f53fd 111.61%);
+  box-shadow: 0px 10px 20px rgba(83, 95, 253, 0.3);
+  border-radius: 10px;
+  border: 0px;
+}
+
+.showMeHow-text {
+  font-family: Supreme;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-decoration-line: underline;
+  margin-left: 100px;
+  color: #535ffd;
+}
+
+.image-wrapper {
+  width: 42%;
+  margin-left: 100px;
+}
+
+.image-wrapper > img {
+  width: 590px;
+  height: 731px;
+}
+
+.background-navbar {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #ffffff 34.58%,
+    rgba(255, 255, 255, 0.81) 51.56%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  position: fixed;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 25vh;
+}

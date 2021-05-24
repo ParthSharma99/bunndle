@@ -8,8 +8,6 @@ import page1imgMobile from "../images/page1imgMobile.png";
 import page2imgMobile from "../images/page2imgMobile.png";
 import page3imgMobile from "../images/page3imgMobile.png";
 import page4imgMobile from "../images/page4imgMobile.png";
-import useInterval from "react-useinterval";
-import { useTransition, animated, config } from "react-spring";
 
 const pagesData = [
   {
@@ -78,32 +76,45 @@ function LandingPage(props) {
   const [index, setIndex] = useState(1);
   const data = mobile ? mobilepagesData : pagesData;
   const page = data[index - 1];
-  const nextPage = () => {
-    setTimeout(() => {
-      if (index === 4) {
-        setIndex(1);
-      } else {
-        setIndex(index + 1);
-      }
-    });
-  };
 
-  const transitions = useTransition(index, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    config: config.default,
+  return data.map((page, key) => {
+    return (
+      <div
+        className={
+          mobile ? "waitlist-page-wrapper-mobile" : "waitlist-page-wrapper"
+        }
+      >
+        <WaitlistPage {...page} mobile={mobile} />
+      </div>
+    );
   });
 
-  return transitions(
-    (styles, item) =>
-      item && (
-        <animated.div style={styles}>
-          <div className="waitlist-page-wrapper" onClick={() => nextPage()}>
-            <WaitlistPage {...page} mobile={mobile} />
-          </div>
-        </animated.div>
-      )
-  );
+  // const nextPage = () => {
+  //   setTimeout(() => {
+  //     if (index === 4) {
+  //       setIndex(1);
+  //     } else {
+  //       setIndex(index + 1);
+  //     }
+  //   });
+  // };
+
+  // const transitions = useTransition(index, {
+  //   from: { opacity: 0 },
+  //   enter: { opacity: 1 },
+  //   config: config.default,
+  // });
+
+  // return transitions(
+  //   (styles, item) =>
+  //     item && (
+  //       <animated.div style={styles}>
+  //         <div className="waitlist-page-wrapper" onClick={() => nextPage()}>
+  //           <WaitlistPage {...page} mobile={mobile} />
+  //         </div>
+  //       </animated.div>
+  //     )
+  // );
 }
 
 LandingPage.propTypes = {};

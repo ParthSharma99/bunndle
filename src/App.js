@@ -5,6 +5,8 @@ import './mobile.css'
 import './css/supreme.css'
 import HomePage from './pages/homePage'
 import LandingPage from './pages/landingPage'
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
+import WaitListForm from "./pages/waitListForm";
 
 
 function useWindowSize() {
@@ -22,20 +24,29 @@ function useWindowSize() {
 
 function App() {
   const [width, height] = useWindowSize();
-  const [thresholdSize] = useState(1270);
+  const [thresholdSize] = useState(920);
   return (
     <div className="App">
-      <div className="background-navbar">
-        <span className="logo-wrapper"><img className={(width<thresholdSize)?"mobile-logo" :"logo"} src={logo}/></span>
-      </div>
+      <Router>
+        <Route path={"/"} exact
+          render={() => (
+            <>
+              <div className="background-navbar">
+                <span className="logo-wrapper"><img className={(width<thresholdSize)?"mobile-logo" :"logo"} src={logo}/></span>
+              </div>
+              
+              <LandingPage mobile={(width<thresholdSize)?true:false}/>
+              {(width<thresholdSize) ?
+              <div className="button-wrapper-mobile">
+                <button className="join-waitlist-button" onClick={() => window.location.href='waitlist'}>Join Waitlist</button>
+              </div>
+              :''
+              }      
+            </>
+          )} />
+        <Route path="/waitlist" render={(props) =><><span className="logo-wrapper"><img className={(width<thresholdSize)?"mobile-logo" :"logo"} src={logo}/></span> <WaitListForm mobile={(width<thresholdSize)?true:false}/> </>} />
+      </Router>
       
-      <LandingPage mobile={(width<thresholdSize)?true:false}/>
-      {(width<thresholdSize) ?
-      <div className="button-wrapper-mobile">
-        <button className="join-waitlist-button">Join Waitlist</button>
-      </div>
-       :''
-      }
       
     </div>
   );

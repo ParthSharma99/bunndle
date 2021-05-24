@@ -5,7 +5,7 @@
   position: relative;
 }
 .mobile-logo {
-  position: absolute;
+  position: fixed;
   width: 106.41px;
   height: 25px;
   left: 24px;
@@ -48,7 +48,7 @@
 }
 
 .button-wrapper-mobile {
-  position: absolute;
+  position: fixed;
   bottom: 18px;
   width: 100%;
   display: flex;
@@ -100,4 +100,100 @@
   align-content: center;
   justify-content: center;
   margin: 0;
+}
+
+.waitlist-form-wrapper-mobile {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.waitlist-right-side-mobile {
+  width: 100%;
+  height: 80%;
+  margin-top: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.form-title-mobile {
+  width: 100%;
+  height: 24px;
+  margin-left: 3%;
+  font-family: Supreme-Bold;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+
+  color: #0f0f0f;
+}
+
+.waitlist-buttons-mobile {
+  position: fixed;
+  bottom: 10vh;
+  width: 80%;
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+}
+.waitlist-back-button-mobile {
+  background: #ffffff;
+  border: 2px solid #7058fe;
+  box-sizing: border-box;
+  box-shadow: 0px 10px 20px rgba(147, 147, 147, 0.3);
+  border-radius: 10px;
+  padding: 10px 50px;
+}
+.waitlist-next-button-mobile {
+  background: linear-gradient(103.63deg, #535ffd -11.28%, #7f53fd 111.61%);
+  box-shadow: 0px 10px 20px rgba(83, 95, 253, 0.3);
+  border-radius: 10px;
+  color: white;
+  padding: 10px 60px;
+  border: 0px;
+}
+
+.input-field-wrapper-mobile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 50px;
+}
+.field-label-mobile {
+  margin-bottom: 8px;
+  margin-left: 16px;
+  width: 100%;
+  font-family: Supreme-Medium;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+
+  color: #0f0f0f;
+}
+.input-field-mobile {
+  padding: 12px 16px;
+  width: 100%;
+  margin: 0 10px;
+  border: 1px solid #7058fe;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+.field-description-mobile {
+  margin-top: 16px;
+  margin-left: 16px;
+  font-family: Supreme-Regular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #0f0f0f;
+}
+.form-fields-wrapper-mobile {
+  width: 90%;
+  display: flex;
+  justify-content: center;
 }

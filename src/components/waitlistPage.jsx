@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 
 function WaitlistPageMobile(props) {
   const { titleText, descriptionText, imgSrc, showMeHow } = props;
 
   return (
-    <div className="waitlist-page-wrapper-mobile">
+    <>
       <div className="title-text-mobile">{titleText}</div>
       <div className="description-text-mobile">{descriptionText}</div>
       {/* <div className="button-wrapper-mobile">
@@ -22,14 +23,22 @@ function WaitlistPageMobile(props) {
       ) : (
         ""
       )}
-    </div>
+    </>
   );
 }
 
 function WaitlistPage(props) {
   const { titleText, descriptionText, imgSrc, showMeHow, mobile, nextPage } =
     props;
-  console.log(mobile);
+  const history = useHistory();
+
+  useEffect(() => {
+    return history.listen((location) => {
+      if (location.action === "POP") {
+        history.goBack();
+      }
+    });
+  }, []);
   if (mobile) return WaitlistPageMobile(props);
   return (
     <>
@@ -37,7 +46,12 @@ function WaitlistPage(props) {
         <div className="title-text">{titleText}</div>
         <div className="description-text">{descriptionText}</div>
         <div className="button-wrapper">
-          <button className="join-waitlist-button">Join Waitlist</button>
+          <button
+            className="join-waitlist-button"
+            onClick={() => (window.location.href = "waitlist")}
+          >
+            Join Waitlist
+          </button>
           {showMeHow ? (
             <a className="showMeHow-text" href="#">
               show me how?

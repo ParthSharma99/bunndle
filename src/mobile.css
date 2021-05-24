@@ -197,3 +197,31 @@
   display: flex;
   justify-content: center;
 }
+.completed-text-1-mobile {
+  margin-left: 3.5%;
+  margin-top: 12vh;
+  font-family: Supreme-Medium;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+
+  color: #0f0f0f;
+}
+
+.completed-text-2-mobile {
+  margin-left: 3.5%;
+  margin-top: 5vh;
+  font-family: Supreme-Medium;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+
+  color: #0f0f0f;
+}
+
+.referral-input-mobile {
+  margin-top: 5vh;
+  margin-left: 3%;
+}

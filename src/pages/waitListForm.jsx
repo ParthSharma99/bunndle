@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useTransition, animated, config } from "react-spring";
 import { useHistory } from "react-router-dom";
+import copyIcon from "../images/copyIcon.svg";
+import twitter from "../images/twitter.svg";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const formData = [
   {
@@ -104,6 +107,14 @@ function WaitListFormMobile(props) {
 
 function Form(props) {
   const { page, mobile } = props;
+  const referralLink = "bunndle.com/userId";
+  const [copied, setCopied] = useState(false);
+
+  const toggleCopied = () => {
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   if (page === 3) {
     // log field data
     console.log("DATA check : ", userFilledData);
@@ -131,16 +142,31 @@ function Form(props) {
     case 3:
       return (
         <>
-          <div className="completed-text-1">
+          <div
+            className={mobile ? "completed-text-1-mobile" : "completed-text-1"}
+          >
             Thank you for registering. We will send you an email when your
-            <br></br>
             account is ready for your use :)
           </div>
-          <div className="completed-text-2">
-            Meanwhile, share your referral code with your friends. <br></br>
-            We will move you up the waitlist.
+          <div
+            className={mobile ? "completed-text-2-mobile" : "completed-text-2"}
+          >
+            Meanwhile, share your referral code with your friends. We will move
+            you up the waitlist.
           </div>
-          <div className="referral-input">Referral Here</div>
+          <div className={mobile ? "referral-input-mobile" : "referral-input"}>
+            <div className="referral-wrapper">
+              <input type="text" className="referral" value={referralLink} />
+              <CopyToClipboard
+                text={referralLink}
+                onCopy={() => toggleCopied()}
+              >
+                <img className="referral-icon" src={copyIcon} />
+              </CopyToClipboard>
+              <img className="twitter-icon" src={twitter} />
+            </div>
+            {copied ? <div>Copied!!</div> : ""}
+          </div>
         </>
       );
       break;

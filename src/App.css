@@ -113,12 +113,12 @@
 }
 
 .waitlist-left-side {
-  width: 40%;
+  width: 50%;
   height: 100%;
 }
 
 .waitlist-right-side {
-  width: 60%;
+  width: 50%;
   height: 100%;
 }
 .form-title {
@@ -176,7 +176,7 @@
   position: fixed;
   bottom: 95px;
   right: 10%;
-  width: 50%;
+  width: 40%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -211,7 +211,7 @@
 }
 
 .completed-text-1 {
-  margin-top: 16px;
+  margin-top: 6vw;
   font-family: Supreme-Regular;
   font-style: normal;
   font-weight: normal;
@@ -222,7 +222,7 @@
 }
 
 .completed-text-2 {
-  margin-top: 16px;
+  margin-top: 10vw;
   font-family: Supreme-Regular;
   font-style: normal;
   font-weight: normal;
@@ -230,4 +230,30 @@
   line-height: 24px;
 
   color: #0f0f0f;
+}
+
+.referral-input {
+  margin-top: 5vh;
+}
+.form-fields-wrapper {
+  width: 80%;
+}
+.referral-wrapper {
+  display: flex;
+}
+.referral {
+  padding-left: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 48px;
+  width: 80%;
+  border: 1px solid #7058fe;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+.referral-icon {
+  margin-left: -48px;
+}
+.twitter-icon {
+  margin-left: auto;
 }

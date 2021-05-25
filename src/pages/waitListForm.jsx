@@ -137,6 +137,19 @@ function Form(props) {
     }
   }, [page]);
 
+  const tweet = (link) => {
+    let twitterParameters = [];
+
+    twitterParameters.push("text=" + encodeURI("Bunndle App Tweet Trail."));
+    twitterParameters.push("url=" + encodeURI(link));
+
+    const url =
+      "https://twitter.com/intent/tweet?" + twitterParameters.join("&");
+    console.log(url);
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
+
   switch (page) {
     case 1:
       return (
@@ -185,7 +198,11 @@ function Form(props) {
               >
                 <img className="referral-icon" src={copyIcon} />
               </CopyToClipboard>
-              <img className="twitter-icon" src={twitter} />
+              <img
+                className="twitter-icon"
+                src={twitter}
+                onClick={() => tweet(referralLink)}
+              />
             </div>
             {copied ? <div>Copied!!</div> : ""}
           </div>

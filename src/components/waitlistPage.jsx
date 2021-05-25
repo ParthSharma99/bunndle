@@ -15,14 +15,14 @@ function WaitlistPageMobile(props) {
 
       <div className="image-wrapper-mobile">
         <img src={imgSrc} />
+        {showMeHow ? (
+          <a className="showMeHow-text-mobile" href="#">
+            show me how?
+          </a>
+        ) : (
+          ""
+        )}
       </div>
-      {showMeHow ? (
-        <a className="showMeHow-text-mobile" href="#">
-          show me how?
-        </a>
-      ) : (
-        ""
-      )}
     </>
   );
 }

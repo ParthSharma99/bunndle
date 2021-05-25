@@ -5,8 +5,11 @@ import './mobile.css'
 import './css/supreme.css'
 import HomePage from './pages/homePage'
 import LandingPage from './pages/landingPage'
+import ReferralPage from './pages/referralPage'
 import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
 import WaitListForm from "./pages/waitListForm";
+import firebase from "firebase/firebase";
+import firebaseConfig from './firebaseConfig'
 
 
 function useWindowSize() {
@@ -23,6 +26,11 @@ function useWindowSize() {
 }
 
 function App() {
+
+  useEffect(() => {
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  })
+
   const [width, height] = useWindowSize();
   const [thresholdSize] = useState(920);
   return (
@@ -45,6 +53,8 @@ function App() {
             </>
           )} />
         <Route path="/waitlist" render={(props) =><><span className="logo-wrapper"><img className={(width<thresholdSize)?"mobile-logo" :"logo"} src={logo}/></span> <WaitListForm mobile={(width<thresholdSize)?true:false}/> </>} />
+        <Route path="/referral/:id" component={(props) => <ReferralPage {...props} firebase={firebase}/>} />
+      
       </Router>
       
       

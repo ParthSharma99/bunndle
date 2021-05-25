@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTransition, animated, config } from "react-spring";
 import { useHistory } from "react-router-dom";
 import copyIcon from "../images/copyIcon.svg";
 import twitter from "../images/twitter.svg";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import firebase from "firebase/firebase";
+
+import firebaseConfig from "../firebaseConfig";
 
 const formData = [
   {
@@ -40,14 +43,23 @@ let userFilledData = {
   "reserve your username ( you can change it later )": "",
   "where are you located?": "",
   "what’s your persona?": "",
+  referralCount: 1,
 };
+
+const questions = [
+  "what’s your email id? ",
+  "what’s your full name?",
+  "reserve your username ( you can change it later )",
+  "where are you located?",
+  "what’s your persona?",
+];
 
 function InputFields(props) {
   const { label, placeholderText, description, mobile } = props;
   const [value, setValue] = useState(userFilledData[label]);
 
   const handleChange = (newVal) => {
-    setValue(newVal);
+    setValue(newVal.trim());
     userFilledData[label] = newVal;
   };
   return (
@@ -107,18 +119,21 @@ function WaitListFormMobile(props) {
 
 function Form(props) {
   const { page, mobile } = props;
-  const referralLink = "bunndle.com/userId";
+  let referralLink = "http://bunndle.vercel.app/referral/";
   const [copied, setCopied] = useState(false);
 
   const toggleCopied = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
-  if (page === 3) {
-    // log field data
-    console.log("DATA check : ", userFilledData);
-  }
+  useEffect(() => {
+    if (page === 3) {
+      const pushedId = firebase.database().ref("users").push(userFilledData);
+      console.log("DATA check : ", userFilledData);
+      console.log("ID : ", pushedId.key);
+      referralLink += pushedId.key;
+    }
+  }, []);
 
   switch (page) {
     case 1:
@@ -156,7 +171,12 @@ function Form(props) {
           </div>
           <div className={mobile ? "referral-input-mobile" : "referral-input"}>
             <div className="referral-wrapper">
-              <input type="text" className="referral" value={referralLink} />
+              <input
+                type="text"
+                className="referral"
+                value={referralLink}
+                readOnly
+              />
               <CopyToClipboard
                 text={referralLink}
                 onCopy={() => toggleCopied()}
@@ -177,7 +197,37 @@ function WaitListForm(props) {
   const { mobile } = props;
   const history = useHistory();
   const [page, setPage] = useState(1);
+  const [fillFields, setFillFields] = useState(false);
+
+  useEffect(() => {
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  }, []);
+
   const nextPage = () => {
+    if (page === 1) {
+      for (let i = 0; i < 3; i++) {
+        if (userFilledData[questions[i]].length === 0) {
+          // show unfilled data
+          setFillFields(true);
+          setTimeout(() => {
+            setFillFields(false);
+          }, 3000);
+          return;
+        }
+      }
+    } else if (page === 2) {
+      for (let i = 3; i < 5; i++) {
+        if (userFilledData[questions[i]].length === 0) {
+          // show unfilled data
+          setFillFields(true);
+          setTimeout(() => {
+            setFillFields(false);
+          }, 3000);
+          return;
+        }
+      }
+    }
+
     setTimeout(() => {
       if (page === 3) {
         setPage(1);
@@ -222,7 +272,13 @@ function WaitListForm(props) {
                 )
             )}
           </div>
-
+          {fillFields ? (
+            <div style={{ color: "red", marginLeft: "20px" }}>
+              Some Fields are missing...
+            </div>
+          ) : (
+            ""
+          )}
           {page === 3 ? (
             ""
           ) : (
@@ -265,7 +321,13 @@ function WaitListForm(props) {
               )
           )}
         </div>
-
+        {fillFields ? (
+          <div style={{ color: "red", marginLeft: "20px" }}>
+            Some Fields are missing...
+          </div>
+        ) : (
+          ""
+        )}
         {page === 3 ? (
           ""
         ) : (

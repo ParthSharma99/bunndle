@@ -119,7 +119,9 @@ function WaitListFormMobile(props) {
 
 function Form(props) {
   const { page, mobile } = props;
-  let referralLink = "http://bunndle.vercel.app/referral/";
+  const [referralLink, setLink] = useState(
+    "http://bunndle.vercel.app/referral/"
+  );
   const [copied, setCopied] = useState(false);
 
   const toggleCopied = () => {
@@ -131,9 +133,9 @@ function Form(props) {
       const pushedId = firebase.database().ref("users").push(userFilledData);
       console.log("DATA check : ", userFilledData);
       console.log("ID : ", pushedId.key);
-      referralLink += pushedId.key;
+      setLink(referralLink + pushedId.key);
     }
-  }, []);
+  }, [page]);
 
   switch (page) {
     case 1:

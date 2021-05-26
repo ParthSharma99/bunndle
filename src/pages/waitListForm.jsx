@@ -140,7 +140,11 @@ function Form(props) {
   const tweet = (link) => {
     let twitterParameters = [];
 
-    twitterParameters.push("text=" + encodeURI("Bunndle App Tweet Trail."));
+    twitterParameters.push(
+      "text=" +
+        encodeURI(`Use your existing digital social spaces to create a growing network of friends and professionals.
+    Click this link, to move up the waitlist : `)
+    );
     twitterParameters.push("url=" + encodeURI(link));
 
     const url =

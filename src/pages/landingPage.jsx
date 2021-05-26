@@ -71,21 +71,79 @@ const mobilepagesData = [
   },
 ];
 
+function FadeInSection(props) {
+  const [isVisible, setVisible] = React.useState(true);
+  const domRef = React.useRef();
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => setVisible(entry.isIntersecting));
+      },
+      { rootMargin: "-40% 0px", threshold: 0.2 }
+    );
+    observer.observe(domRef.current);
+    return () => observer.unobserve(domRef.current);
+  }, []);
+  return (
+    <div
+      className={`fade-in-section ${isVisible ? "is-visible" : ""}`}
+      ref={domRef}
+    >
+      {props.children}
+    </div>
+  );
+}
+
 function LandingPage(props) {
   const { mobile } = props;
   const [index, setIndex] = useState(1);
   const data = mobile ? mobilepagesData : pagesData;
   const page = data[index - 1];
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [elementHeight, setElementHeight] = useState(0);
+  const positions = [0.5, 1.5, 2.5, 3.5];
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+    console.log(position);
+    // setElementHeight(
+    //   document.getElementsByClassName("waitlist-page-wrapper")[0].clientHeight
+    // );
+    // let windowBottom = position + window.innerHeight;
+    // let items = document.getElementsByClassName("waitlist-page-wrapper");
+    // for (let i = 0; i < items.length; i++) {
+    //   let objectBottom =
+    //     items[i].getClientRects()[0].top + items[i].getClientRects()[0].height;
+    //   console.log("hey   ", items[i].getClientRects()[0].top);
+
+    //   if (objectBottom < windowBottom) {
+    //     if (items[i].style.opacity === 0) items[i].style.opacity = 1;
+    //   } else {
+    //     if (items[i].style.opacity === 1) items[i].style.opacity = 0;
+    //   }
+    // }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return data.map((page, key) => {
     return (
-      <div
-        className={
-          mobile ? "waitlist-page-wrapper-mobile" : "waitlist-page-wrapper"
-        }
-      >
-        <WaitlistPage {...page} mobile={mobile} />
-      </div>
+      <FadeInSection>
+        <div
+          className={
+            mobile ? "waitlist-page-wrapper-mobile" : "waitlist-page-wrapper"
+          }
+        >
+          <WaitlistPage {...page} mobile={mobile} />
+        </div>
+      </FadeInSection>
     );
   });
 

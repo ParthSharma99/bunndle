@@ -2,7 +2,6 @@ import {React, useEffect, useState, useLayoutEffect} from "react";
 import logo from './images/logo.svg'
 import './App.css'
 import './mobile.css'
-import './css/supreme.css'
 import HomePage from './pages/homePage'
 import LandingPage from './pages/landingPage'
 import ReferralPage from './pages/referralPage'

@@ -95,6 +95,7 @@ function FadeInSection(props) {
 }
 
 function LandingPage(props) {
+  const referralId = sessionStorage.getItem("referralId");
   const { mobile } = props;
   const [index, setIndex] = useState(1);
   const data = mobile ? mobilepagesData : pagesData;

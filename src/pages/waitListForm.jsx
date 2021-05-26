@@ -43,7 +43,7 @@ let userFilledData = {
   "reserve your username ( you can change it later )": "",
   "where are you located?": "",
   "what’s your persona?": "",
-  referralCount: 1,
+  referralCount: [],
 };
 
 const questions = [
@@ -118,6 +118,8 @@ function WaitListFormMobile(props) {
 }
 
 function Form(props) {
+  const referralId = sessionStorage.getItem("referralId");
+  console.log("ID : ", referralId);
   const { page, mobile } = props;
   const [referralLink, setLink] = useState(
     "http://bunndle.vercel.app/referral/"
@@ -134,6 +136,14 @@ function Form(props) {
       console.log("DATA check : ", userFilledData);
       console.log("ID : ", pushedId.key);
       setLink(referralLink + pushedId.key);
+      try {
+        firebase
+          .database()
+          .ref("users/" + referralId + "/referralCount")
+          .push(pushedId.key);
+      } catch (error) {
+        console.log("error Encountered", error);
+      }
     }
   }, [page]);
 
@@ -142,8 +152,9 @@ function Form(props) {
 
     twitterParameters.push(
       "text=" +
-        encodeURI(`Use your existing digital social spaces to create a growing network of friends and professionals.
-    Click this link, to move up the waitlist : `)
+        encodeURI(
+          `Use your existing digital social spaces to create a growing network of friends and professionals.\nClick this link, to move up the waitlist : `
+        )
     );
     twitterParameters.push("url=" + encodeURI(link));
 

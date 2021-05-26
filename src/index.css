@@ -12,5 +12,7 @@ code {
 }
 
 ::placeholder {
-  font-family: Supreme-ExtraLight;
+  font-family: Supreme;
+  font-weight: 200;
+  
 }

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import WaitlistPage from "../components/waitlistPage";
+import React, { lazy, Suspense } from "react";
+import loadable from "@loadable/component";
+// import WaitlistPage from "../components/waitlistPage";
 import page1img from "../images/page1img.png";
 import page2img from "../images/page2img.png";
 import page3img from "../images/page3img.png";
@@ -8,6 +9,8 @@ import page1imgMobile from "../images/page1imgMobile.png";
 import page2imgMobile from "../images/page2imgMobile.png";
 import page3imgMobile from "../images/page3imgMobile.png";
 import page4imgMobile from "../images/page4imgMobile.png";
+
+const WaitlistPage = loadable(() => import("../components/waitlistPage"));
 
 const pagesData = [
   {
@@ -79,7 +82,7 @@ function FadeInSection(props) {
       (entries) => {
         entries.forEach((entry) => setVisible(entry.isIntersecting));
       },
-      { rootMargin: "-40% 0px", threshold: 0.2 }
+      { rootMargin: "-41% 0px", threshold: 0.2 }
     );
     observer.observe(domRef.current);
     return () => observer.unobserve(domRef.current);
@@ -95,85 +98,27 @@ function FadeInSection(props) {
 }
 
 function LandingPage(props) {
-  const referralId = sessionStorage.getItem("referralId");
   const { mobile } = props;
-  const [index, setIndex] = useState(1);
+  if (mobile) {
+  } else {
+  }
   const data = mobile ? mobilepagesData : pagesData;
-  const page = data[index - 1];
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [elementHeight, setElementHeight] = useState(0);
-  const positions = [0.5, 1.5, 2.5, 3.5];
-
-  const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollPosition(position);
-    console.log(position);
-    // setElementHeight(
-    //   document.getElementsByClassName("waitlist-page-wrapper")[0].clientHeight
-    // );
-    // let windowBottom = position + window.innerHeight;
-    // let items = document.getElementsByClassName("waitlist-page-wrapper");
-    // for (let i = 0; i < items.length; i++) {
-    //   let objectBottom =
-    //     items[i].getClientRects()[0].top + items[i].getClientRects()[0].height;
-    //   console.log("hey   ", items[i].getClientRects()[0].top);
-
-    //   if (objectBottom < windowBottom) {
-    //     if (items[i].style.opacity === 0) items[i].style.opacity = 1;
-    //   } else {
-    //     if (items[i].style.opacity === 1) items[i].style.opacity = 0;
-    //   }
-    // }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return data.map((page, key) => {
     return (
-      <FadeInSection>
+      <FadeInSection mobile={mobile}>
         <div
-          className={
-            mobile ? "waitlist-page-wrapper-mobile" : "waitlist-page-wrapper"
-          }
+          className="waitlist-page-wrapper"
+          id={key === 0 ? "topPage" : ""}
+          key={key}
         >
-          <WaitlistPage {...page} mobile={mobile} />
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <WaitlistPage {...page} mobile={mobile} />
+          </Suspense>
         </div>
       </FadeInSection>
     );
   });
-
-  // const nextPage = () => {
-  //   setTimeout(() => {
-  //     if (index === 4) {
-  //       setIndex(1);
-  //     } else {
-  //       setIndex(index + 1);
-  //     }
-  //   });
-  // };
-
-  // const transitions = useTransition(index, {
-  //   from: { opacity: 0 },
-  //   enter: { opacity: 1 },
-  //   config: config.default,
-  // });
-
-  // return transitions(
-  //   (styles, item) =>
-  //     item && (
-  //       <animated.div style={styles}>
-  //         <div className="waitlist-page-wrapper" onClick={() => nextPage()}>
-  //           <WaitlistPage {...page} mobile={mobile} />
-  //         </div>
-  //       </animated.div>
-  //     )
-  // );
 }
 
 LandingPage.propTypes = {};

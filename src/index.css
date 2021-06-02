@@ -1,9 +1,9 @@
 body {
   margin: 0;
-
   font-family: "Supreme", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
@@ -14,4 +14,13 @@ code {
 ::placeholder {
   font-family: Supreme;
   font-weight: 200;
+}
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+:focus-visible {
+  outline: #7058fe auto 1px;
 }

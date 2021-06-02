@@ -55,7 +55,7 @@ const questions = [
 ];
 
 function InputFields(props) {
-  const { label, placeholderText, description, mobile } = props;
+  const { label, placeholderText, description } = props;
   const [value, setValue] = useState(userFilledData[label]);
 
   const handleChange = (newVal) => {
@@ -63,64 +63,23 @@ function InputFields(props) {
     userFilledData[label] = newVal;
   };
   return (
-    <div
-      className={mobile ? "input-field-wrapper-mobile" : "input-field-wrapper"}
-    >
-      <div className={mobile ? "field-label-mobile" : "field-label"}>
-        {label}
-      </div>
+    <div className="input-field-wrapper">
+      <div className="field-label">{label}</div>
       <input
-        className={mobile ? "input-field-mobile" : "input-field"}
+        className="input-field"
         value={value}
         onChange={(e) => handleChange(e.target.value)}
         placeholder={placeholderText}
       />
-      <div
-        className={mobile ? "field-description-mobile" : "field-description"}
-      >
-        {description}
-      </div>
+      <div className="field-description">{description}</div>
     </div>
   );
-}
-
-function WaitListFormMobile(props) {
-  const { mobile } = props;
-
-  const [page, setPage] = useState(1);
-  const nextPage = () => {
-    setTimeout(() => {
-      if (page === 3) {
-        setPage(1);
-      } else {
-        setPage(page + 1);
-      }
-    });
-  };
-
-  const prevPage = () => {
-    setTimeout(() => {
-      if (page === 1) {
-        setPage(3);
-      } else {
-        setPage(page - 1);
-      }
-    });
-  };
-
-  const transitions = useTransition(page, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    config: config.default,
-  });
-
-  return;
 }
 
 function Form(props) {
   const referralId = sessionStorage.getItem("referralId");
   console.log("ID : ", referralId);
-  const { page, mobile } = props;
+  const { page } = props;
   const [referralLink, setLink] = useState(
     "http://bunndle.vercel.app/referral/"
   );
@@ -141,6 +100,7 @@ function Form(props) {
           .database()
           .ref("users/" + referralId + "/referralCount")
           .push(pushedId.key);
+        sessionStorage.removeItem("referralId");
       } catch (error) {
         console.log("error Encountered", error);
       }
@@ -170,36 +130,30 @@ function Form(props) {
       return (
         <>
           {formData.slice(0, 3).map((data) => {
-            return <InputFields {...data} mobile={mobile} />;
+            return <InputFields {...data} />;
           })}
         </>
       );
-      break;
     case 2:
       return (
         <>
           {formData.slice(3).map((data) => {
-            return <InputFields {...data} mobile={mobile} />;
+            return <InputFields {...data} />;
           })}
         </>
       );
-      break;
     case 3:
       return (
         <>
-          <div
-            className={mobile ? "completed-text-1-mobile" : "completed-text-1"}
-          >
+          <div className="completed-text-1">
             Thank you for registering. We will send you an email when your
             account is ready for your use :)
           </div>
-          <div
-            className={mobile ? "completed-text-2-mobile" : "completed-text-2"}
-          >
+          <div className="completed-text-2">
             Meanwhile, share your referral code with your friends. We will move
             you up the waitlist.
           </div>
-          <div className={mobile ? "referral-input-mobile" : "referral-input"}>
+          <div className="referral-input">
             <div className="referral-wrapper">
               <input
                 type="text"
@@ -211,9 +165,10 @@ function Form(props) {
                 text={referralLink}
                 onCopy={() => toggleCopied()}
               >
-                <img className="referral-icon" src={copyIcon} />
+                <img alt="" className="referral-icon" src={copyIcon} />
               </CopyToClipboard>
               <img
+                alt=""
                 className="twitter-icon"
                 src={twitter}
                 onClick={() => tweet(referralLink)}
@@ -223,12 +178,12 @@ function Form(props) {
           </div>
         </>
       );
-      break;
+    default:
+      return "";
   }
 }
 
 function WaitListForm(props) {
-  const { mobile } = props;
   const history = useHistory();
   const [page, setPage] = useState(1);
   const [fillFields, setFillFields] = useState(false);
@@ -287,55 +242,6 @@ function WaitListForm(props) {
     config: config.default,
   });
 
-  if (mobile) {
-    return (
-      <div className="waitlist-form-wrapper-mobile">
-        <div className="waitlist-right-side-mobile">
-          <div className="form-title-mobile">
-            {page === 3
-              ? "Pre-registration complete"
-              : "Step " + page + " out of 2"}
-          </div>
-          <div className="form-fields-wrapper-mobile">
-            {transitions(
-              (styles, item) =>
-                item && (
-                  <animated.div style={styles}>
-                    <Form page={item} mobile={mobile} />
-                  </animated.div>
-                )
-            )}
-          </div>
-          {fillFields ? (
-            <div style={{ color: "red", marginLeft: "20px" }}>
-              Some Fields are missing...
-            </div>
-          ) : (
-            ""
-          )}
-          {page === 3 ? (
-            ""
-          ) : (
-            <div className="waitlist-buttons-mobile">
-              <button
-                className="waitlist-back-button-mobile"
-                onClick={() => prevPage()}
-              >
-                Back
-              </button>
-              <button
-                className="waitlist-next-button-mobile"
-                onClick={() => nextPage()}
-              >
-                Next
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="waitlist-form-wrapper">
       <div className="waitlist-left-side"></div>
@@ -350,7 +256,7 @@ function WaitListForm(props) {
             (styles, item) =>
               item && (
                 <animated.div style={styles}>
-                  <Form page={item} mobile={mobile} />
+                  <Form page={item} />
                 </animated.div>
               )
           )}

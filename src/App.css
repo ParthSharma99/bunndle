@@ -280,6 +280,18 @@
   transform: none;
 }
 
+.dropDown-container > div {
+  border: 1px solid #7058fe;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: none;
+}
+.dropDownOptions {
+  color: #7f53fd;
+}
+
+/* Mobile */
+
 @media screen and (max-width: 1000px) {
   .logo {
     position: fixed;
